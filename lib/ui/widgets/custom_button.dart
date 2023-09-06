@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: 5.h,
+        height: 6.h,
         width: 40.w,
         decoration: BoxDecoration(
             color: Colors.black, borderRadius: BorderRadius.circular(10.w)),

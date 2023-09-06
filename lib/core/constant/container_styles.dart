@@ -17,4 +17,18 @@ class ContainerStyles{
       )
   );
 
+  static var viewAllDataContainer = BoxDecoration(
+      borderRadius: BorderRadius.circular(05.w),
+      gradient: LinearGradient(
+          colors: [
+            Colors.black12,
+            Colors.blue,
+            Colors.blue.withOpacity(.5),
+            Colors.black12,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight
+      )
+  );
+
 }

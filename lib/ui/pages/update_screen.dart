@@ -4,14 +4,17 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:simple_todo_app_with_sqflite/core/constant/constant_text_style.dart';
 import 'package:simple_todo_app_with_sqflite/core/constant/container_styles.dart';
 import 'package:simple_todo_app_with_sqflite/core/controllers/insert_provider.dart';
-import 'package:simple_todo_app_with_sqflite/ui/pages/view_all.dart';
+import 'package:simple_todo_app_with_sqflite/core/models/student_models.dart';
 import 'package:simple_todo_app_with_sqflite/ui/widgets/custom_button.dart';
 import 'package:simple_todo_app_with_sqflite/ui/widgets/custom_text_filed.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class UpdateScreen extends StatelessWidget {
 
-  @override
+final Student student;
+
+   const UpdateScreen({super.key, required this.student});
+
+   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -19,12 +22,11 @@ class MainPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.blue,
           title: Text(
-            'Insert Screen',
+            'Update Screen',
             style: ConstTextStyles.appBarStyle,
           ),
         ),
-        body: Consumer<InsertProvider>(builder: (context, insertProvider,child) {
-
+        body: Consumer<InsertProvider>(builder: ( context, insertProvider,child) {
           return Container(
             color: Colors.blueGrey,
             height: 100.h,
@@ -38,13 +40,12 @@ class MainPage extends StatelessWidget {
                       height: 05.h,
                     ),
                     Container(
-                      height: 80.h,
+                      height: 70.h,
                       width: 100.w,
                       decoration: ContainerStyles.mainContainerStyle,
                       child: Form(
-                        key: insertProvider.insertDataKey,
                         child: SingleChildScrollView(
-                          child: Column(
+                          child:Column(
                             children: [
                               SizedBox(
                                   height: 10.h,
@@ -105,28 +106,14 @@ class MainPage extends StatelessWidget {
                               SizedBox(
                                 height: 2.h,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CustomButton(text: 'Save', onPressed: () {
-                                    if(insertProvider.insertDataKey.currentState!.validate()){
-                                      insertProvider.insertStudentProvider();
-
-                                    }
-                                  }),
+                            SizedBox(
+                              width: 100.w,
+                              child: CustomButton(text: 'Update',onPressed: (){
 
 
-                                  CustomButton(
-                                      text: 'View All',
-                                      onPressed: () {
-                                        insertProvider.getAllStudentsProvider();
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context) {
-                                              return const ViewAllPage();
-                                            }));
-                                      }),
-                                ],
-                              )
+
+                              },),
+                            )
                             ],
                           ),
                         ),

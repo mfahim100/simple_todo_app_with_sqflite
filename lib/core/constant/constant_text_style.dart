@@ -19,4 +19,8 @@ class ConstTextStyles{
   fontSize: 20.sp,
   fontWeight: FontWeight.bold);
 
+
+  static var viewAllContainer =  GoogleFonts.merriweather(
+      fontSize: 17.sp,color: Colors.white
+  );
 }
