@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:simple_todo_app_with_sqflite/core/models/student_models.dart';
+import 'package:simple_todo_app_with_sqflite/core/models/update_student_model.dart';
 import 'package:simple_todo_app_with_sqflite/core/services/database_services.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -76,7 +77,6 @@ class InsertProvider extends ChangeNotifier {
   }
 
   Future<void> insertStudentProvider()  async {
-    print('Before Something');
     EasyLoading.show();
     String name = _nameController.text.trim();
     String coarseName = _coarseController.text.trim();
@@ -91,7 +91,6 @@ class InsertProvider extends ChangeNotifier {
    else{
      Fluttertoast.showToast(msg: 'Something Went Wrong');
    }
-    print('After Something');
    EasyLoading.dismiss();
    clearController();
    notifyListeners();
@@ -118,14 +117,36 @@ class InsertProvider extends ChangeNotifier {
 
 
   void oldData(Student s){
+    int id   = s.id!;
     _nameController.text = s.name!;
     _coarseController.text = s.course!;
     _mobileNumberController.text = s.mobile!;
     _totalFeeController.text = s.totalFee!.toString();
     _feePaidController.text = s.feePaid!.toString();
-
     notifyListeners();
+  }
 
+
+  Future<void> updateDataProvider(int id) async {
+    EasyLoading.show();
+    print('Before Something');
+    String name = _nameController.text.trim();
+    String coarseName = _coarseController.text.trim();
+    String mobile = _mobileNumberController.text.trim();
+    String totalFee = _totalFeeController.text.trim();
+    String feePaid = _feePaidController.text.trim();
+    UpdateStudentModel student = UpdateStudentModel(id,name, coarseName, mobile, int.parse(totalFee), int.parse(feePaid),);
+    int result = await DatabaseServices.instance.updateStudent(student);
+    if(result>0){
+      Fluttertoast.showToast(msg: 'Record Updated');
+    }
+    else{
+      Fluttertoast.showToast(msg: 'Something Went Wrong');
+    }
+    getAllStudentsProvider();
+    print('After Something');
+    EasyLoading.dismiss();
+    notifyListeners();
   }
 
 

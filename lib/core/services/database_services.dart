@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import '../models/student_models.dart';
+import '../models/update_student_model.dart';
 
 
 class DatabaseServices {
@@ -68,10 +69,11 @@ class DatabaseServices {
 
 
   // Update operation: Update a Student in DB
-  Future<int> updateStudent(Student student) async {
+  Future<int> updateStudent(UpdateStudentModel student) async {
     var db = await instance.database;
     var result = db.update('tbl_student', student.toMap(),
         where: 'id=?', whereArgs: [student.id]);
+
     return result;
   }
 

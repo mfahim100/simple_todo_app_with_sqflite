@@ -109,9 +109,10 @@ final Student student;
                             SizedBox(
                               width: 100.w,
                               child: CustomButton(text: 'Update',onPressed: (){
-
-
-
+                                if(insertProvider.insertDataKey.currentState!.validate()){
+                                  insertProvider.updateDataProvider(student.id!);
+                                  Navigator.of(context).pop();
+                                }
                               },),
                             )
                             ],
